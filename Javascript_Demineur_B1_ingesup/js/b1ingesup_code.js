@@ -2,71 +2,70 @@
 //CSS & JavaScript
 //----------------------------------------------------------------------------------------------------------//
 // Project travailler En Groupe//----------------------------------------------------------------------------------------------------------//
-		
-		
+
+//Choix de la difficulté, création de la grille--------------//
+
+function ChangeDifficulte(){
+	  var dif = document.getElementById("difficulte").value;
+		switch(dif){
+			case "1":
+				GenererTab(10, 20);
+				break;
+			case "2":
+				GenererTab(20, 30);
+				break;
+			case "3":
+				GenererTab(30, 40);
+				break;
+			default: alert("erreur");
+		}
+	}
+function GenererTab(x, y){
+	if (document.getElementById("conteneur2")){ //on teste l'existene de conteneur2
+		document.body.removeChild(document.getElementById("conteneur2")); // on supprime le noeud qui contient le tableau
+	}
 		N_div = document.createElement("div");
 		N_div.setAttribute("id", "conteneur2");
-		N_div.onclick = chronoStart;
+
 		N_div.setAttribute("style", "display:block");
 		document.body.appendChild(N_div);
 		tab = document.createElement("table");
 		tblBody = document.createElement("tbody");
 		// creation de ligne
-        for (var i = 0; i < 21; i++) {
+        for (var i = 0; i < (x+1); i++) {
             // creation de colonne
             var ligne = document.createElement("tr");
 
-            for (var j = 0; j < 31; j++) {
-             var colonne = document.createElement("td");    
+            for (var j = 0; j < (y+1); j++) {
+             var colonne = document.createElement("td");
                    colonne.id =i+":"+j;
+									 colonne.setAttribute("class", "hidden");
 				   colonne.onclick = verififer;
                    ligne.appendChild(colonne);
-					colonne.classList.add("mine");
             }
 			tblBody.appendChild(ligne);
 		}
-		
+
 		tab.appendChild(tblBody);
 		tab.setAttribute("border", "3");
 		N_div.appendChild(tab);
-		
-		
+		PoseBombes(x, y);
+}
 		function verififer(){
 			alert("yay");
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//time
-var startTime = 0;
-var start = 0;
-var end = 0;
-var diff = 0;
-var timerID = 0;
-function chrono(){
-	end = new Date();
-	diff = end - start;
-	diff = new Date(diff);
-	var sec = diff.getSeconds();
-	var min = diff.getMinutes();
-	if (min < 10){
-		min = "0" + min;
-	}
-	if (sec < 10){
-		sec = "0" + sec;
-	}
-	}
-	document.getElementById("time").innerHTML = min + ":" + sec;
-	timerID = setTimeout("chrono()", 10);
-}
-function chronoStart(){
-	start = new Date();
-	chrono();
+
+function PoseBombes(x, y){ // Pose les bombes dans les tableau, 1 chance sur 4.
+	var nbBombe = 0;
+	for (var i = 0; i < (x+1); i++)
+			for (var j = 0; j < (y+1); j++) {
+				var Isbombe = Math.random();
+				if (Isbombe <= 0.05){
+					var idBombe = i+":"+j;
+					nbBombe ++;
+					document.getElementById("bombes").innerHTML = nbBombe;
+					document.getElementById(idBombe).setAttribute("class", "mine");
+					console.log(idBombe);
+				}
+			}
 }
