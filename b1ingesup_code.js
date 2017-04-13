@@ -64,5 +64,7 @@ function PoseBombes(x, y){ // Pose les bombes dans les tableau, 1 chance sur 4.
 					document.getElementById(idBombe).setAttribute("class", "mine");
 					console.log(idBombe);
 				}
+
+
 			}
 }

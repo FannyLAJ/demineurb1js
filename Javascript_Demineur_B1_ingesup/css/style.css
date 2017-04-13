@@ -40,10 +40,11 @@ margin: auto;
 border-collapse: collapse;
 }
 
-td {
+
+.hidden {
 	background-color: LightGray ;
-	border: 2px outset;
-    padding: 9px;
+	border: 2px outset black;
+	padding: 9px;
 	height: 2px;
 	max-height:2px;
 	width: 2px;
